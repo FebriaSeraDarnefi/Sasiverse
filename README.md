@@ -1,58 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">SasiVerse</h1>
+
+<p align="center">Sistem Informasi E-Commerce &amp; Digitalisasi Kain Sasirangan khas Banjar dengan integrasi Unique Product Code (UPC) QR Code, modul edukasi budaya, serta multi-tenant fulfillment untuk pemberdayaan UMKM lokal.</p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/FebriaSeraDarnefi/Sasiverse"><img src="https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white" alt="Laravel 13"></a>
+<a href="https://www.php.net"><img src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white" alt="PHP 8.3+"></a>
+<a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind%20CSS-3-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
 </p>
 
-## About Laravel
+## Tentang SasiVerse
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+SasiVerse adalah sistem informasi e-commerce dan digitalisasi **kain Sasirangan**, kain tradisional khas Banjar, Kalimantan Selatan. Platform ini memberdayakan UMKM lokal lewat toko online multi-tenant: setiap UMKM mengelola produk dan pengirimannya sendiri, sementara pembeli berbelanja dari banyak UMKM dalam satu keranjang. Setiap produk dilengkapi **Unique Product Code (UPC) QR Code** sebagai identitas digital, dan platform disiapkan untuk modul edukasi budaya Sasirangan. Fitur utamanya:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Katalog produk publik dengan halaman detail berbasis slug.
+- Unique Product Code (UPC) QR Code untuk setiap produk aktif, bisa dilihat dan diunduh oleh UMKM.
+- Multi-tenant fulfillment: pesanan dipecah per UMKM, dan tiap UMKM mengemas serta mengirim bagiannya sendiri.
+- Pendaftaran UMKM dengan verifikasi admin (setujui, tolak, nonaktifkan).
+- Keranjang belanja dan checkout untuk customer.
+- Pembayaran transfer bank dengan unggah bukti bayar dan verifikasi admin.
+- Pengelolaan pesanan oleh UMKM: dikemas, dikirim, lalu dikonfirmasi diterima oleh customer.
+- Tiga peran pengguna (`admin`, `umkm`, `customer`) dengan dashboard masing-masing.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+SasiVerse dibangun dengan [Laravel](https://laravel.com), [Laravel Breeze](https://laravel.com/docs/starter-kits#laravel-breeze), Blade, [Tailwind CSS](https://tailwindcss.com), [Alpine.js](https://alpinejs.dev), dan [Vite](https://vitejs.dev).
 
-## Learning Laravel
+## Peran Pengguna
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Peran | Akses |
+|-------|-------|
+| `admin` | Verifikasi UMKM dan pembayaran |
+| `umkm` | Kelola produk, pesanan masuk, profil usaha, QR Code |
+| `customer` | Keranjang, checkout, pembayaran, riwayat pesanan |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Produk hanya tampil di katalog dan bisa dibeli setelah UMKM berstatus **aktif**.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Alur Transaksi
 
-## Agentic Development
+1. UMKM mendaftar, lalu admin menyetujui.
+2. UMKM menambahkan produk.
+3. Customer memasukkan produk ke keranjang dan checkout.
+4. Customer transfer ke rekening toko dan mengunggah bukti bayar (JPG, JPEG, PNG, WEBP, maksimal 4 MB).
+5. Admin menyetujui atau menolak pembayaran.
+6. UMKM mengemas dan mengirim pesanan.
+7. Customer menandai pesanan telah diterima.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Instalasi
+
+Prasyarat: PHP 8.3 atau lebih baru, [Composer](https://getcomposer.org), Node.js, dan npm.
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/FebriaSeraDarnefi/Sasiverse.git
+cd Sasiverse
 
-php artisan boost:install
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
+
+touch database/database.sqlite   # Windows: type nul > database\database.sqlite
+php artisan migrate --seed
+php artisan storage:link
+
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Untuk pengembangan, jalankan server, antrean, log, dan Vite sekaligus:
 
-## Contributing
+```bash
+composer run dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Lalu buka `http://localhost:8000`.
 
-## Code of Conduct
+## Konfigurasi Pembayaran
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Rekening tujuan transfer dibaca dari `config/payment.php`. Tambahkan di `.env`:
 
-## Security Vulnerabilities
+```env
+PAYMENT_BANK_NAME="Nama Bank"
+PAYMENT_ACCOUNT_NUMBER="1234567890"
+PAYMENT_ACCOUNT_HOLDER="Nama Pemilik Rekening"
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Akun Contoh
 
-## License
+Setelah `php artisan migrate --seed`, tersedia akun untuk pengembangan lokal:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Peran | Email | Kata sandi |
+|-------|-------|------------|
+| Admin | `admin@sasiverse.test` | `password` |
+| UMKM | `umkm@sasiverse.test` | `password` |
+| Customer | `customer@sasiverse.test` | `password` |
+
+> Akun ini hanya untuk pengembangan lokal. Ganti semua kata sandi sebelum deploy ke server produksi.
+
+## Pengujian
+
+```bash
+composer test
+```
+
+## Belajar Laravel
+
+Laravel memiliki [dokumentasi](https://laravel.com/docs) dan pustaka video tutorial yang lengkap. [Laracasts](https://laracasts.com) berisi ribuan video tentang Laravel, PHP modern, pengujian, dan JavaScript. Kamu juga bisa belajar membangun aplikasi dari nol lewat [Laravel Learn](https://laravel.com/learn).
+
+## Kontribusi
+
+Terima kasih sudah tertarik berkontribusi pada SasiVerse. Silakan buka [Issue](https://github.com/FebriaSeraDarnefi/Sasiverse/issues) atau kirim Pull Request.
+
+## Keamanan
+
+Jika kamu menemukan celah keamanan di SasiVerse, jangan dipublikasikan. Hubungi pemilik repositori secara langsung lewat profil [FebriaSeraDarnefi](https://github.com/FebriaSeraDarnefi).
+
+## Lisensi
+
+SasiVerse dibangun di atas framework Laravel, perangkat lunak open-source berlisensi [MIT](https://opensource.org/licenses/MIT).
